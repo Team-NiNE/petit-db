@@ -5,7 +5,7 @@ class open {
 	public function __construct($host, $user, $pass, $name) {
 		$this->db = new mysqli($host, $user, $pass, $name);
 	}
-	
+
 	private function _arrCol($string) {
 		return implode(", ", array_keys($string));
 	}
@@ -61,8 +61,10 @@ class open {
 		$result = $this->db->query($sql);
 		$sqlarray = $result->fetch_array(MYSQLI_ASSOC);
 		if(is_null($sqlarray)) {
-			die('function openNewTournament, Errored.');
+			die('function openNewTournament, DB Query Errored.');
 		}
 		newTournamentOpen($admin, $sqlarray['number'], $std, $taiko, $ctb, $mania);
+
+		return true;
 	}
 }
